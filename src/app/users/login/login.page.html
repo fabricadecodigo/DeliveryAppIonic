@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Entrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" >
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-margin-vertical">
+      <ion-button type="submit" expand="block" color="primary">Entrar</ion-button>
+    </div>
+  </form>
+
+  <ion-button expand="block" fill="clear" [routerLink]="['/create-account']">Criar uma conta</ion-button>
+  <ion-button expand="block" fill="clear" [routerLink]="['/forgot-password']">Esqueci minha senha</ion-button>
+</ion-content>
