@@ -52,8 +52,9 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'orders',
+        loadChildren: () => import('../orders/order-list/order-list.module')
+          .then(m => m.OrderListPageModule)
       },
       {
         path: 'tab3',
