@@ -1,0 +1,20 @@
+.subtotal,
+.delivery {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+
+.total {
+  font-weight: bold;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: 0;
+}
+
+ion-label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

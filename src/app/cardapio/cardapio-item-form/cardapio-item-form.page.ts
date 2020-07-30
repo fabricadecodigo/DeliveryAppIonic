@@ -31,6 +31,6 @@ export class CardapioItemFormPage implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/tabs/cardapio/shopping-cart']);
+    this.router.navigate(['/tabs/checkout/shopping-cart']);
   }
 }

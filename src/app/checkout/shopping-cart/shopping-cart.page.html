@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carrinho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+  <h2 class="ion-padding-horizontal">Itens do pedido</h2>
+  <ion-list>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+    <app-shopping-cart-item></app-shopping-cart-item>
+  </ion-list>
+
+  <div class="ion-padding-horizontal ion-margin-bottom">
+    <ion-button fill="outline" expand="block" color="primary">
+      Adicionar mais itens
+    </ion-button>
+  </div>
+
+</ion-content>
+<ion-footer class="ion-padding-horizontal">
+  <app-shopping-cart-total [subtotal]="119.00"></app-shopping-cart-total>
+  
+  <ion-button expand="block" color="primary" [routerLink]="['/tabs/checkout/delivery']">
+    Escolher local de entrega
+  </ion-button>
+</ion-footer>

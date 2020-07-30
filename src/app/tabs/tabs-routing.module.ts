@@ -21,9 +21,33 @@ const routes: Routes = [
               .then(m => m.CardapioItemFormPageModule)
           },
           {
+            path: 'edit/:id',
+            loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
+              .then(m => m.CardapioItemFormPageModule)
+          }
+        ]
+      },
+      {
+        path: 'checkout',
+        children: [
+          {
+            path: '',
+            redirectTo: '/tabs/cardapio',
+            pathMatch: 'full'
+          },
+          {
             path: 'shopping-cart',
-            loadChildren: () => import('../cardapio/shopping-cart/shopping-cart.module')
+            loadChildren: () => import('../checkout/shopping-cart/shopping-cart.module')
               .then(m => m.ShoppingCartPageModule)
+          },
+          {
+            path: 'delivery',
+            loadChildren: () => import('../checkout/delivery/delivery.module')
+              .then(m => m.DeliveryPageModule)
+          },
+          {
+            path: 'payment',
+            loadChildren: () => import('../checkout/payment/payment.module').then(m => m.PaymentPageModule)
           }
         ]
       },

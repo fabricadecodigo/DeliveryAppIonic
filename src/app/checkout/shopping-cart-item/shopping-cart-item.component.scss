@@ -1,0 +1,19 @@
+.item-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.item-name {
+  flex-grow: 1;
+}
+
+.item-total,
+.item-button {
+  text-align: right;
+}
+
+ion-button {
+  --padding-start: 0;
+  --padding-end: 0;
+}
