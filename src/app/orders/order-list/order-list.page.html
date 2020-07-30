@@ -1,9 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>order-list</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Meus pedidos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-segment (ionChange)="onSegmentChange($event)" [value]="selectedPage">
+    <ion-segment-button value="pedidos">
+      <ion-label>Pedidos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="em-andamento">
+      <ion-label>Em andamento</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
+  <app-order-old-list *ngIf="selectedPage === 'pedidos'"></app-order-old-list>
+  <app-order-in-progress-list *ngIf="selectedPage === 'em-andamento'"></app-order-in-progress-list>
 </ion-content>

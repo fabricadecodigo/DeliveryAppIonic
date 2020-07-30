@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-list.page.scss'],
 })
 export class OrderListPage implements OnInit {
+  selectedPage = 'pedidos';
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSegmentChange(event: any) {
+    this.selectedPage = event.target.value;
+  }
 }
