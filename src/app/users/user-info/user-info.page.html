@@ -1,9 +1,21 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>user-info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Minha conta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item [routerLink]="['personal-info']">
+      <ion-label>
+        Alterar informações pessoais
+      </ion-label>
+    </ion-item>
 
+    <ion-item [routerLink]="['change-password']">
+      <ion-label>
+        Alterar senha
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

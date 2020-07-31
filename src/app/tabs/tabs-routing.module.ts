@@ -63,8 +63,21 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        loadChildren: () => import('../users/user-info/user-info.module')
-          .then(m => m.UserInfoPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/user-info/user-info.module')
+              .then(m => m.UserInfoPageModule),
+          },
+          {
+            path: 'personal-info',
+            loadChildren: () => import('../users/personal-info/personal-info.module').then( m => m.PersonalInfoPageModule)
+          },
+          {
+            path: 'change-password',
+            loadChildren: () => import('../users/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+          }
+        ]
       },
       {
         path: '',
