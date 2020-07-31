@@ -1,9 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>restaurant-info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Nome do restaurante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle *ngIf="status == 0" color="danger">Fechado</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="status == 1">Aberto</ion-card-subtitle>
+      <ion-card-title>Nome do restaurante</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list>
+        <ion-item href="tel:3232323232">
+          <ion-label>(32) 32323232</ion-label>
+          <ion-icon slot="start" name="call-outline"></ion-icon>
+        </ion-item>
 
+        <ion-item>
+          <ion-label>Nome da rua, 123 - Bairro</ion-label>
+          <ion-icon slot="start" name="business-outline"></ion-icon>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Horário de funcionamento
+        </ion-list-header>
+        <ion-item lines="full">
+          <ion-label>
+            Sexta feira 18:00 às 00:00
+          </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label>
+            Sábado 18:00 às 00:00
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
