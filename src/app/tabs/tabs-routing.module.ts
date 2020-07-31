@@ -62,6 +62,11 @@ const routes: Routes = [
           .then(m => m.RestaurantInfoPageModule)
       },
       {
+        path: 'user',
+        loadChildren: () => import('../users/user-info/user-info.module')
+          .then(m => m.UserInfoPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/cardapio',
         pathMatch: 'full'
