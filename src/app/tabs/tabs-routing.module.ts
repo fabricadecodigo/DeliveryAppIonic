@@ -57,8 +57,9 @@ const routes: Routes = [
           .then(m => m.OrderListPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'restaurant',
+        loadChildren: () => import('../restaurants/restaurant-info/restaurant-info.module')
+          .then(m => m.RestaurantInfoPageModule)
       },
       {
         path: '',
