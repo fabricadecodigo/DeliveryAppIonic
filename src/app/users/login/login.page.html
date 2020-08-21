@@ -1,25 +1,39 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/cardapio"></ion-back-button>
+    </ion-buttons>    
     <ion-title>Entrar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="onSubmit()" >
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
     <ion-list>
       <ion-item>
         <ion-label position="stacked">E-mail</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" #email="ngModel" required email></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <ion-label color="danger">
+          <p *ngIf="email.errors.required">O campo é obrigatório</p>
+          <p *ngIf="email.errors.email">E-mail inválido</p>
+        </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Senha</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <ion-label color="danger">
+          <p *ngIf="password.errors.required">O campo é obrigatório</p>
+        </ion-label>
       </ion-item>
     </ion-list>
 
     <div class="ion-margin-vertical">
-      <ion-button type="submit" expand="block" color="primary">Entrar</ion-button>
+      <ion-button type="submit" expand="block" color="primary" [disabled]="form.form.invalid">Entrar</ion-button>
     </div>
   </form>
 

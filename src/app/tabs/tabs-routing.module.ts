@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,17 +19,20 @@ const routes: Routes = [
           {
             path: 'new',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
-              .then(m => m.CardapioItemFormPageModule)
+              .then(m => m.CardapioItemFormPageModule),
+            canActivate: [AuthGuard]
           },
           {
             path: 'edit/:id',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
-              .then(m => m.CardapioItemFormPageModule)
+              .then(m => m.CardapioItemFormPageModule),
+            canActivate: [AuthGuard]
           }
         ]
       },
       {
         path: 'checkout',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -54,7 +58,8 @@ const routes: Routes = [
       {
         path: 'orders',
         loadChildren: () => import('../orders/order-list/order-list.module')
-          .then(m => m.OrderListPageModule)
+          .then(m => m.OrderListPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'restaurant',
@@ -63,6 +68,7 @@ const routes: Routes = [
       },
       {
         path: 'user',
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',
@@ -71,11 +77,11 @@ const routes: Routes = [
           },
           {
             path: 'personal-info',
-            loadChildren: () => import('../users/personal-info/personal-info.module').then( m => m.PersonalInfoPageModule)
+            loadChildren: () => import('../users/personal-info/personal-info.module').then(m => m.PersonalInfoPageModule)
           },
           {
             path: 'change-password',
-            loadChildren: () => import('../users/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+            loadChildren: () => import('../users/change-password/change-password.module').then(m => m.ChangePasswordPageModule)
           }
         ]
       },
