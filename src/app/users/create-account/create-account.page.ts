@@ -47,7 +47,6 @@ export class CreateAccountPage {
       }
 
     } catch (error) {
-      console.error(error);
       this.toastService.showError('Ocorreu algum erro ao buscar o cep. Por favor tente novamente');
     }
   }

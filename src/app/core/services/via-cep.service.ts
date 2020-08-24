@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface IViaCepResult {
@@ -11,8 +11,12 @@ export interface IViaCepResult {
   providedIn: 'root'
 })
 export class ViaCepService {
+  http: HttpClient;
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpBackend: HttpBackend) {
+    // não quero que os requests desse endereço passem pelo httpInterceptor
+    this.http = new HttpClient(this.httpBackend);
+  }
 
   getAddressByCep(cep: string) {
     cep = cep.replace('-', '');
