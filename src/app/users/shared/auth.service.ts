@@ -38,7 +38,21 @@ export class AuthService {
   async createAccount(user: IUserModel) {
     try {
       // crating an account with email and password
-      const response = await this.http.post<IUserModel>(`${environment.api}/customers`, user).toPromise();
+      const body = {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        address: {
+          cep: user.cep,
+          stret: user.stret,
+          number: user.number,
+          complement: user.complement,
+          neighborhood: user.neighborhood,
+          city: user.city
+        }
+      };
+
+      const response = await this.http.post<IUserModel>(`${environment.api}/customers`, body).toPromise();
       if (response) {
         return true;
       } else {
