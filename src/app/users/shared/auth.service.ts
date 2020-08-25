@@ -42,6 +42,7 @@ export class AuthService {
         name: user.name,
         email: user.email,
         password: user.password,
+        phone: user.phone,
         address: {
           cep: user.cep,
           stret: user.stret,
