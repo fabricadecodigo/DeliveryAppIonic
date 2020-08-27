@@ -28,4 +28,14 @@ export class ToastService {
     toastResult.present();
   }
 
+  async showWarning(message: string) {
+    const toastResult = await this.toast.create({
+      message,
+      duration: 3000,
+      color: 'warning',
+      position: 'bottom'
+    });
+    toastResult.present();
+  }
+
 }

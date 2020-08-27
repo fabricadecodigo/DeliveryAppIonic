@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Adicionar item</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,7 +10,7 @@
 <ion-content class="ion-padding">
   <form (ngSubmit)="onSubmit()">
     <ion-list>
-      <app-cardapio-item></app-cardapio-item>
+      <app-cardapio-item [product]="model.product"></app-cardapio-item>
       <ion-item>
         <ion-grid>
           <ion-row class="ion-align-items-center">
@@ -17,7 +20,7 @@
               </ion-button>
             </ion-col>
             <ion-col class="ion-text-center">
-              {{ model.qtd }}
+              {{ model.quantity }}
             </ion-col>
             <ion-col>
               <ion-button expand="block" color="secondary" (click)="onBtnPlusClick()">
@@ -29,7 +32,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Observação</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea [(ngModel)]="model.note" name="note"></ion-textarea>
       </ion-item>
     </ion-list>
 

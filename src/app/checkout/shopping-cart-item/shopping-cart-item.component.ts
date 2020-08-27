@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { IShoppingCartModel } from './../shared/ishopping-cart-model';
 
 @Component({
   selector: 'app-shopping-cart-item',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartItemComponent implements OnInit {
 
+  @Input()
+  item: IShoppingCartModel = {};
+
+  @Output()
+  actionButtonClicked = new EventEmitter();
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+  onActionButtonClicked() {
+    this.actionButtonClicked.emit(this.item);
+  }
 }

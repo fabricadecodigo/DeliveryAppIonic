@@ -57,4 +57,8 @@ export class CardapioService {
 
     return cardapioItems;
   }
+
+  getById(id: string) {
+    return this.http.get<ICardapioResponse>(`${environment.api}/cardapio/${id}`).toPromise();
+  }
 }

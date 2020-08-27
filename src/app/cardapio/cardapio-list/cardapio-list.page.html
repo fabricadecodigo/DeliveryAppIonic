@@ -5,18 +5,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar inputmode="search" 
-    showCancelButton="focus" 
-    (ionChange)="onSearchChange($event)" 
+  <ion-searchbar inputmode="search" showCancelButton="focus" (ionChange)="onSearchChange($event)"
     (ionCancel)="onSearchCancel($event)"></ion-searchbar>
 
-  <ion-item-group *ngFor="let category of cardapio" >
+  <ion-item-group *ngFor="let category of cardapio">
     <ion-item-divider>
       <ion-label>{{category.categoryName}}</ion-label>
     </ion-item-divider>
 
-    <app-cardapio-item [routerLink]="['new']" 
-      *ngFor="let product of category.products" [product]="product"></app-cardapio-item>
+    <app-cardapio-item *ngFor="let product of category.products" [product]="product"
+      [routerLink]="['new', product._id]">
+    </app-cardapio-item>
   </ion-item-group>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

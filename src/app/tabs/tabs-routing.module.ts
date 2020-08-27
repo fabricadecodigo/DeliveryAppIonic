@@ -1,3 +1,4 @@
+import { OpenCloseGuard } from './../restaurants/shared/open-close.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -17,22 +18,22 @@ const routes: Routes = [
               .then(m => m.CardapioListPageModule),
           },
           {
-            path: 'new',
+            path: 'new/:productId',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
               .then(m => m.CardapioItemFormPageModule),
-            canActivate: [AuthGuard]
+            canActivate: [AuthGuard, OpenCloseGuard]
           },
           {
-            path: 'edit/:id',
+            path: 'edit/:productId/:itemId',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
               .then(m => m.CardapioItemFormPageModule),
-            canActivate: [AuthGuard]
+            canActivate: [AuthGuard, OpenCloseGuard]
           }
         ]
       },
       {
         path: 'checkout',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, OpenCloseGuard],
         children: [
           {
             path: '',

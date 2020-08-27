@@ -1,10 +1,10 @@
 <ion-item lines="full">
   <div class="item-container">
-    <div class="item-quantity">10x</div>
-    <div class="item-name ion-padding-horizontal">Nome do produto muito grande</div>
-    <div class="item-total">R$119,00</div>
+    <div class="item-quantity">{{item?.quantity}}x</div>
+    <div class="item-name ion-padding-horizontal">{{item?.product?.name}}</div>
+    <div class="item-total">{{ item?.quantity * item?.product?.price | currency:'BRL' }} </div>
     <div class="item-button">
-      <ion-button fill="clear" size="small">
+      <ion-button fill="clear" size="small" (click)="onActionButtonClicked()">
         <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </div>
