@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddressService } from './../../users/shared/address.service';
 import { IRestaurantResponse } from './../shared/irestaurant-response';
 import { RestaurantService } from './../shared/restaurant.service';
 
@@ -14,7 +15,8 @@ export class RestaurantInfoPage implements OnInit {
 
 
   constructor(
-    private restaurantService: RestaurantService
+    private restaurantService: RestaurantService,
+    private addressService: AddressService
   ) { }
 
   ngOnInit() {
@@ -29,12 +31,11 @@ export class RestaurantInfoPage implements OnInit {
   }
 
   getAddressText() {
-    let address = `${this.restaurant.stret}, ${this.restaurant.number}`;
-    if (this.restaurant.complement) {
-      address += ` - ${this.restaurant.complement}`;
-    }
-    address += ` - ${this.restaurant.neighborhood}`;
-    return address;
+    return this.addressService.getAddressText(
+      this.restaurant.stret,
+      this.restaurant.number,
+      this.restaurant.complement,
+      this.restaurant.neighborhood);
   }
 
   getDayOfWeekName(value: number) {

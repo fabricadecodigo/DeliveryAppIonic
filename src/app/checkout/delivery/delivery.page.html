@@ -13,17 +13,17 @@
       <ion-label>Local de entrega</ion-label>
     </ion-list-header>
 
-    <ion-radio-group value="delivery">
+    <ion-radio-group [(ngModel)]="deliveryModel.deliveryPlaceType" (ionChange)="onDeliveryPlaceChange()">
       <ion-item lines="full">
         <ion-label class="ion-text-wrap">
           Retirar no local<br />
-          <small>Nome da rua, 111 - Bairo</small>
+          <small>{{getRestaurantAddressText()}}</small>
         </ion-label>
-        <ion-radio slot="start" value="retirar"></ion-radio>
+        <ion-radio slot="start" [value]="deliveryPlaceTypeEnum.restaurant"></ion-radio>
       </ion-item>
       <ion-item lines="full">
         <ion-label>Delivery</ion-label>
-        <ion-radio slot="start" value="delivery"></ion-radio>
+        <ion-radio slot="start" [value]="deliveryPlaceTypeEnum.delivery"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
@@ -32,33 +32,26 @@
     <ion-list-header>
       <ion-label>Endereços</ion-label>
     </ion-list-header>
-    <ion-radio-group value="" >
-      <ion-item lines="full">
+    <ion-radio-group [(ngModel)]="deliveryModel.addressId" (ionChange)="onAdressChange()">
+      <ion-item lines="full" *ngFor="let address of addresses">
         <ion-label class="ion-text-wrap">
-          Nome da rua, 111 - Bairro
+          {{getAddressText(address)}}
         </ion-label>
-        <ion-radio slot="start" value="id-1"></ion-radio>
-      </ion-item>
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap">
-          Nome da rua, 111 - Bairro
-        </ion-label>
-        <ion-radio slot="start" value="id-2"></ion-radio>
-      </ion-item>
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap">
-          Nome da rua, 111 - Bairro
-        </ion-label>
-        <ion-radio slot="start" value="id-3"></ion-radio>
+        <ion-radio slot="start" [value]="address._id"
+          [disabled]="deliveryModel.deliveryPlaceType === deliveryPlaceTypeEnum.restaurant"></ion-radio>
       </ion-item>
     </ion-radio-group>
-    
+
   </ion-list>
 </ion-content>
 <ion-footer class="ion-padding-horizontal">
-  <app-shopping-cart-total [subtotal]="119.00" [deliveryTax]="10" [total]="129"></app-shopping-cart-total>
-  
-  <ion-button expand="block" color="primary" [routerLink]="['/tabs/checkout/payment']">
+  <app-shopping-cart-total 
+    [subtotal]="subtotal$ | async" 
+    [deliveryTax]="deliveryValue$ | async" 
+    [deliveryFree]="deliveryFree$ | async"
+    [total]="total$ | async"></app-shopping-cart-total>
+
+  <ion-button expand="block" color="primary" (click)="onPaymentButtonClick()"  [disabled]="disablePaymentButton$ | async">
     Escolher forma de pagamento
   </ion-button>
 </ion-footer>

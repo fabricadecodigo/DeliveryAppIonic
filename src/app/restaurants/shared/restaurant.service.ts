@@ -1,9 +1,9 @@
-import { IBusinessHourResponse } from './ibusiness-hour-response';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../../environments/environment';
+import { IBusinessHourResponse } from './ibusiness-hour-response';
+import { IDeliveryResponse } from './idelivery-response';
 import { IRestaurantResponse } from './irestaurant-response';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,7 @@ export class RestaurantService {
     if (!this.restaurant) {
       this.restaurant = await this.http.get<IRestaurantResponse>(`${environment.api}/restaurant`).toPromise();
       this.restaurant.businessHour = await this.http.get<IBusinessHourResponse[]>(`${environment.api}/businesshours`).toPromise();
+      this.restaurant.delivery = await this.http.get<IDeliveryResponse[]>(`${environment.api}/delivery`).toPromise();
     }
 
     return this.restaurant;

@@ -1,4 +1,6 @@
 import { IBusinessHourResponse } from './ibusiness-hour-response';
+import { IDeliveryResponse } from './idelivery-response';
+
 export interface IRestaurantResponse {
     _id?: string;
     name?: string;
@@ -11,4 +13,5 @@ export interface IRestaurantResponse {
     neighborhood?: string;
     city?: string;
     businessHour?: IBusinessHourResponse[];
+    delivery?: IDeliveryResponse[];
 }

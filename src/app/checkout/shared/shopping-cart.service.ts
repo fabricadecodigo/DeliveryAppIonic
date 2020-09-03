@@ -1,3 +1,6 @@
+import { DeliveryPlaceType } from './delivery-place-type.enum';
+import { IDeliveryModel } from './idelivery-model';
+import { IRestaurantResponse } from './../../restaurants/shared/irestaurant-response';
 import { IShoppingCartModel } from './ishopping-cart-model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -9,10 +12,20 @@ import { nextTick } from 'process';
 export class ShoppingCartService {
 
   private items: IShoppingCartModel[] = [];
+  private subtotal = 0;
+  private deliveryValue = 0;
+  private deliveryFree = false;
   private total = 0;
 
   itemResult = new BehaviorSubject(this.items);
+  subtotalResult = new BehaviorSubject(this.subtotal);
+  deliveryValueResult = new BehaviorSubject(this.deliveryValue);
+  deliveryFreeResult = new BehaviorSubject(this.deliveryFree);
   totalResult = new BehaviorSubject(this.total);
+  warningResult = new BehaviorSubject('');
+  stopCheckout = new BehaviorSubject(false);
+
+  delivery: IDeliveryModel = {};
 
   constructor() {
     const result = localStorage.getItem('shopping-cart');
@@ -54,13 +67,14 @@ export class ShoppingCartService {
 
   private updateValues() {
     this.itemResult.next(this.items);
-
-    this.total = this.calculateTotal();
-
+    this.subtotal = this.calculateSubtotal();
+    this.subtotalResult.next(this.subtotal);
+    this.deliveryValueResult.next(this.deliveryValue);
+    this.deliveryFreeResult.next(this.deliveryFree);
     this.totalResult.next(this.total);
   }
 
-  private calculateTotal() {
+  private calculateSubtotal() {
     let total = 0;
 
     if (this.items.length > 0) {
@@ -70,5 +84,43 @@ export class ShoppingCartService {
     }
 
     return total;
+  }
+
+  private calculateDeliveryTax(restaurant: IRestaurantResponse, delivery: IDeliveryModel) {
+    if (delivery.deliveryPlaceType === DeliveryPlaceType.restaurant) {
+      this.deliveryFree = true;
+      this.deliveryValue = 0;
+    } else {
+      const deliveryTo = restaurant.delivery.find(q => q.neighborhood === delivery.selectedAddress.neighborhood);
+      if (deliveryTo) {
+        if (deliveryTo.free) {
+          this.deliveryFree = true;
+          this.deliveryValue = 0;
+        } else {
+          this.deliveryFree = false;
+          this.deliveryValue = deliveryTo.value;
+        }
+      } else {
+        // se não entrega para esse endereço, exibir uma msg
+        this.warningResult.next('Não entregamos para o endereço selecionado.');
+        this.stopCheckout.next(true);
+      }
+    }
+  }
+
+  private calculateTotal() {
+    if (this.deliveryFree) {
+      this.total = this.subtotal;
+    } else {
+      this.total = this.subtotal + this.deliveryValue;
+    }
+  }
+
+  calculateDelivery(restaurant: IRestaurantResponse, delivery: IDeliveryModel) {
+    this.delivery = delivery;
+    this.stopCheckout.next(false);
+    this.calculateDeliveryTax(restaurant, delivery);
+    this.calculateTotal();
+    this.updateValues();
   }
 }

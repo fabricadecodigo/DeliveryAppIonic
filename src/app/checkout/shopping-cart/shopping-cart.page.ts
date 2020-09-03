@@ -22,7 +22,7 @@ export class ShoppingCartPage implements OnInit {
 
   ngOnInit() {
     this.items$ = this.shoppingCartService.itemResult;
-    this.subtotal$ = this.shoppingCartService.totalResult;
+    this.subtotal$ = this.shoppingCartService.subtotalResult;
   }
 
   async loadItemActions(item: IShoppingCartModel) {

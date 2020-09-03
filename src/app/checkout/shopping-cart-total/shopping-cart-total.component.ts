@@ -13,6 +13,9 @@ export class ShoppingCartTotalComponent implements OnInit {
   deliveryTax: number;
 
   @Input()
+  deliveryFree = false;
+  
+  @Input()
   total: number;
 
   constructor() { }

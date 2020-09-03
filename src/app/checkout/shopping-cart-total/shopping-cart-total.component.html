@@ -3,7 +3,11 @@
     <ion-label>Subtotal</ion-label>
     <ion-label slot="end" class="ion-text-right">{{ subtotal | currency:'BRL' }}</ion-label>
   </ion-item>
-  <ion-item class="delivery" *ngIf="deliveryTax" >
+  <ion-item class="delivery" *ngIf="deliveryFree">
+    <ion-label>Entrega</ion-label>
+    <ion-label slot="end" class="ion-text-right" color="success">Grátis</ion-label>
+  </ion-item>
+  <ion-item class="delivery" *ngIf="deliveryTax && !deliveryFree" >
     <ion-label>Entrega</ion-label>
     <ion-label slot="end" class="ion-text-right">{{ deliveryTax | currency:'BRL' }}</ion-label>
   </ion-item>
