@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
 
-    <ion-buttons slot="start" >      
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/cardapio"></ion-back-button>
     </ion-buttons>
 
@@ -13,8 +13,7 @@
   <h2 class="ion-padding-horizontal">Itens do pedido</h2>
   <ion-list>
     <app-shopping-cart-item *ngFor="let item of items$ | async" [item]="item"
-      (actionButtonClicked)="loadItemActions($event)"
-    ></app-shopping-cart-item>
+      (actionButtonClicked)="loadItemActions($event)"></app-shopping-cart-item>
   </ion-list>
 
   <div class="ion-padding-horizontal ion-margin-bottom">
@@ -26,8 +25,9 @@
 </ion-content>
 <ion-footer class="ion-padding-horizontal">
   <app-shopping-cart-total [subtotal]="subtotal$ | async"></app-shopping-cart-total>
-  
-  <ion-button expand="block" color="primary" [routerLink]="['/tabs/checkout/delivery']">
+
+  <ion-button expand="block" color="primary" [routerLink]="['/tabs/checkout/delivery']"
+    [disabled]="(items$ | async).length == 0">
     Escolher local de entrega
   </ion-button>
 </ion-footer>
