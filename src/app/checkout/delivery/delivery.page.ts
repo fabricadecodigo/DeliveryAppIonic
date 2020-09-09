@@ -97,7 +97,15 @@ export class DeliveryPage implements OnInit, OnDestroy {
   }
 
   onDeliveryPlaceChange() {
-    this.calculateTotal();
+    if (this.deliveryModel.deliveryPlaceType === DeliveryPlaceType.delivery) {
+      if (this.deliveryModel.selectedAddress) {
+        this.calculateTotal();
+      }
+    } else {
+      this.deliveryModel.addressId = '';
+      this.deliveryModel.selectedAddress = null;
+      this.calculateTotal();
+    }
   }
 
   onAdressChange() {
