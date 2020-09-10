@@ -8,45 +8,49 @@
 </ion-header>
 
 <ion-content class="ion-padding-horizontal ion-padding-bottom">
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Forma de pagamento</ion-label>
-    </ion-list-header>
+  <form #form="ngForm">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Forma de pagamento</ion-label>
+      </ion-list-header>
 
-    <ion-radio-group value="">
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap">
-          Dinheiro
-        </ion-label>
-        <ion-radio slot="start" value="dinheiro"></ion-radio>
+      <ion-radio-group [(ngModel)]="paymentModel.paymentType" name="paymentType" (ionChange)="onPaymentTypeChange()" required>
+        <ion-item lines="full">
+          <ion-label class="ion-text-wrap">
+            Dinheiro
+          </ion-label>
+          <ion-radio slot="start" [value]="paymentType.money"></ion-radio>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label>Cartão</ion-label>
+          <ion-radio slot="start" [value]="paymentType.card"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-list>
+      <ion-item *ngIf="isPaymentMoney">
+        <ion-label position="stacked">Troco para</ion-label>
+        <ion-input type="number" [(ngModel)]="paymentModel.changeFor" name="changeFor"></ion-input>
       </ion-item>
-      <ion-item lines="full">
-        <ion-label>Cartão</ion-label>
-        <ion-radio slot="start" value="cartao"></ion-radio>
+      <ion-item *ngIf="isPaymentCard">
+        <ion-label position="stacked">Qual cartão</ion-label>
+        <ion-select cancelText="cancelar" [(ngModel)]="paymentModel.cardType" name="cardType"
+          [required]="isPaymentCard">
+          <ion-select-option [value]="cardType.mastercardCredit">Mastercard crédito</ion-select-option>
+          <ion-select-option [value]="cardType.mastercardDebit">Mastercard débito</ion-select-option>
+          <ion-select-option [value]="cardType.visaCredit">Visa crédito</ion-select-option>
+          <ion-select-option [value]="cardType.visaDebit">Visa débito</ion-select-option>
+        </ion-select>
       </ion-item>
-    </ion-radio-group>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Troco para</ion-label>
-      <ion-input type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Qual cartão</ion-label>
-      <ion-select cancelText="cancelar">
-        <ion-select-option value="md">Mastercard crédito</ion-select-option>
-        <ion-select-option value="mc">Mastercard débito</ion-select-option>
-        <ion-select-option value="vc">Visa crédito</ion-select-option>
-        <ion-select-option value="vd">Visa débito</ion-select-option>        
-      </ion-select>
-    </ion-item>
-  </ion-list>
+    </ion-list>
+  </form>
 </ion-content>
 
 <ion-footer class="ion-padding-horizontal">
-  <app-shopping-cart-total [subtotal]="119.00" [deliveryTax]="10" [total]="129"></app-shopping-cart-total>
+  <app-shopping-cart-total [subtotal]="subtotal$ | async" [deliveryTax]="deliveryValue$ | async"
+    [deliveryFree]="deliveryFree$ | async" [total]="total$ | async"></app-shopping-cart-total>
 
-  <ion-button expand="block" color="primary">
+  <ion-button expand="block" color="primary" [disabled]="isFormInvalid" (click)="onSubmit()">
     Enviar pedido
   </ion-button>
 </ion-footer>

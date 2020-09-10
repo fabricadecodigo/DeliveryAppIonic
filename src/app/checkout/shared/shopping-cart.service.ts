@@ -1,3 +1,4 @@
+import { IPaymentModel } from './ipayment-model';
 import { DeliveryPlaceType } from './delivery-place-type.enum';
 import { IDeliveryModel } from './idelivery-model';
 import { IRestaurantResponse } from './../../restaurants/shared/irestaurant-response';
@@ -26,6 +27,7 @@ export class ShoppingCartService {
   stopCheckout = new BehaviorSubject(false);
 
   delivery: IDeliveryModel = {};
+  payment: IPaymentModel = {};
 
   constructor() {
     const result = localStorage.getItem('shopping-cart');
@@ -37,6 +39,10 @@ export class ShoppingCartService {
 
   get(id: number) {
     return this.items.find(i => i.id === id);
+  }
+
+  getAll() {
+    return this.items;
   }
 
   add(item: IShoppingCartModel) {
@@ -122,5 +128,37 @@ export class ShoppingCartService {
     this.calculateDeliveryTax(restaurant, delivery);
     this.calculateTotal();
     this.updateValues();
+  }
+
+  getDeliveryInfo() {
+    return this.delivery;
+  }
+
+  getDeliveryTax() {
+    return {
+      free: this.deliveryFree,
+      tax: this.deliveryValue
+    };
+  }
+
+  getPaymentInfo() {
+    return this.payment;
+  }
+
+  setPaymentInfo(payment: IPaymentModel) {
+    this.payment = payment;
+  }
+
+  getTotal() {
+    return this.total;
+  }
+
+  clear() {
+    this.items = [];
+    this.subtotal = 0;
+    this.deliveryValue = 0;
+    this.deliveryFree = false;
+    this.total = 0;
+    this.save();
   }
 }

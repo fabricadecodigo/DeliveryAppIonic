@@ -1,23 +1,13 @@
+<p *ngIf="orders.length == 0" class="ion-padding ion-text-center">
+  Nenhum pedido encontrado
+</p>
+
 <ion-list>
-  <ion-item>
+  <ion-item *ngFor="let order of orders" >
     <div class="item-container">
-      <div class="item-number">#1234987</div>
-      <div class="item-value ion-padding-horizontal">R$10,00</div>
-      <div class="item-date">29/07/2020</div>
-    </div> 
-  </ion-item>
-  <ion-item>
-    <div class="item-container">
-      <div class="item-number">#1234987</div>
-      <div class="item-value ion-padding-horizontal">R$100,00</div>
-      <div class="item-date">29/07/2020</div>
-    </div> 
-  </ion-item>
-  <ion-item>
-    <div class="item-container">
-      <div class="item-number">#1234987</div>
-      <div class="item-value ion-padding-horizontal">R$1,00</div>
-      <div class="item-date">29/07/2020</div>
+      <div class="item-number">{{order.number}}</div>
+      <div class="item-value ion-padding-horizontal">{{order.total | currency:'BRL'}}</div>
+      <div class="item-date">{{order.date | date:'dd/MM/yyy'}}</div>
     </div> 
   </ion-item>
 </ion-list>

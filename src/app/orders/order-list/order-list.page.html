@@ -14,6 +14,6 @@
     </ion-segment-button>
   </ion-segment>
 
-  <app-order-old-list *ngIf="selectedPage === 'pedidos'"></app-order-old-list>
-  <app-order-in-progress-list *ngIf="selectedPage === 'em-andamento'"></app-order-in-progress-list>
+  <app-order-old-list *ngIf="selectedPage === 'pedidos'" [orders]="finishedOrders"></app-order-old-list>
+  <app-order-in-progress-list *ngIf="selectedPage === 'em-andamento'" [orders]="openOrders"></app-order-in-progress-list>
 </ion-content>
