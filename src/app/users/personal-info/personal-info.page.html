@@ -9,56 +9,99 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form>
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
     <ion-list>
       <ion-item-divider><ion-label>Informações pessoais</ion-label></ion-item-divider>
+      
       <ion-item>
         <ion-label position="stacked">Nome</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="personalInfoModel.name" name="name" #name="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <ion-label color="danger">
+          <p *ngIf="name.errors.required">{{validationText.required}}</p>
+        </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">E-mail</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" [(ngModel)]="personalInfoModel.email" name="email" readonly></ion-input>
       </ion-item>    
       
       <ion-item>
         <ion-label position="stacked">Telefone</ion-label>
-        <ion-input type="number"></ion-input>
+        <ion-input type="tel" [(ngModel)]="personalInfoModel.phone" name="phone" #phone="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        <ion-label color="danger">
+          <p *ngIf="phone.errors.required">{{validationText.required}}</p>
+        </ion-label>
       </ion-item>
     </ion-list>
 
     <ion-list>
       <ion-item-divider><ion-label>Endereço</ion-label></ion-item-divider>
-      <ion-item>
-        <ion-label position="stacked">CEP</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+      <div class="cep-container">
+        <div class="cep-input ion-margin-end">
+          <ion-item>
+            <ion-label position="stacked">Cep</ion-label>
+            <ion-input type="text" [(ngModel)]="personalInfoModel.cep" name="cep" #cep="ngModel" required maxlength="8"></ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+            <ion-label color="danger">
+              <p *ngIf="cep.errors.required">{{validationText.required}}</p>
+            </ion-label>
+          </ion-item>
+        </div>
+        <div class="cep-button ion-margin-top">
+          <ion-button type="button" expand="block" color="secondary" fill="outline" (click)="getAddressByCep()" >
+            <ion-icon name="search-outline" slot="start"></ion-icon> Buscar
+          </ion-button>
+        </div>
+      </div>
+      
 
       <ion-item>
         <ion-label position="stacked">Logradouro</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="personalInfoModel.street" name="stret" #stret="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="stret.invalid && (stret.dirty || stret.touched)">
+        <ion-label color="danger">
+          <p *ngIf="stret.errors.required">{{validationText.required}}</p>
+        </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Número</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="personalInfoModel.number" name="number" #number="ngModel" #inputNumber required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="number.invalid && (number.dirty || number.touched)">
+        <ion-label color="danger">
+          <p *ngIf="number.errors.required">{{validationText.required}}</p>
+        </ion-label>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Complemento</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="personalInfoModel.complement" name="complement" #complement="ngModel">
+        </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Bairro</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="personalInfoModel.neighborhood" name="neighborhood" #neighborhood="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)">
+        <ion-label color="danger">
+          <p *ngIf="neighborhood.errors.required">{{validationText.required}}</p>
+        </ion-label>
       </ion-item>
 
     </ion-list>
 
     <div class="ion-margin-vertical">
-      <ion-button expand="block" color="primary">Salvar</ion-button>
+      <ion-button type="submit" expand="block" color="primary" [disabled]="form.form.invalid">Salvar</ion-button>
     </div>
   </form>
 </ion-content>
