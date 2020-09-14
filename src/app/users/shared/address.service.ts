@@ -16,8 +16,8 @@ export class AddressService {
     return this.http.get<IAddressResponse[]>(`${environment.api}/customers-addresses`).toPromise();
   }
 
-  getAddressText(stret: string, addressNumber: string, complement: string, neighborhood: string) {
-    let address = `${stret}, ${addressNumber}`;
+  getAddressText(street: string, addressNumber: string, complement: string, neighborhood: string) {
+    let address = `${street}, ${addressNumber}`;
     if (complement) {
       address += ` - ${complement}`;
     }

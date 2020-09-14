@@ -1,7 +1,6 @@
-export interface IUserModel {
+export interface IUserPersonalInfo {
     name?: string;
     email?: string;
-    password?: string;
     phone?: string;
     cep?: string;
     street?: string;

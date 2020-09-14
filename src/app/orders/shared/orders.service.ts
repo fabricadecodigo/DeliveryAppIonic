@@ -27,14 +27,14 @@ export class OrdersService {
     const products = this.shoppingCartService.getAll();
 
     const address = {
-      stret: '',
+      street: '',
       number: '',
       complement: '',
       neighborhood: ''
     };
 
     if (delivery.deliveryPlaceType === DeliveryPlaceType.delivery) {
-      address.stret = delivery.selectedAddress.stret;
+      address.street = delivery.selectedAddress.street;
       address.number = delivery.selectedAddress.number;
       address.complement = delivery.selectedAddress.complement;
       address.neighborhood = delivery.selectedAddress.neighborhood;

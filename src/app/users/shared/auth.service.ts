@@ -45,11 +45,10 @@ export class AuthService {
         phone: user.phone,
         address: {
           cep: user.cep,
-          stret: user.stret,
+          street: user.street,
           number: user.number,
           complement: user.complement,
-          neighborhood: user.neighborhood,
-          city: user.city
+          neighborhood: user.neighborhood
         }
       };
 
