@@ -86,7 +86,7 @@ export class DeliveryPage implements OnInit, OnDestroy {
 
   getAddressText(address: IAddressResponse) {
     return this.addressService.getAddressText(
-      address.stret,
+      address.street,
       address.number,
       address.complement,
       address.neighborhood);

@@ -36,9 +36,8 @@ export class CreateAccountPage {
       if (this.user.cep) {
         const result = await this.viaCepService.getAddressByCep(this.user.cep);
         if (result) {
-          this.user.stret = result.logradouro;
+          this.user.street = result.logradouro;
           this.user.neighborhood = result.bairro;
-          this.user.city = result.localidade;
 
           if (this.inputNumber) {
             this.inputNumber.setFocus();

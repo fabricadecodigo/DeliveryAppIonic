@@ -78,7 +78,7 @@
 
       <ion-item>
         <ion-label position="stacked">Logradouro</ion-label>
-        <ion-input type="text" [(ngModel)]="user.stret" name="stret" #stret="ngModel" required></ion-input>
+        <ion-input type="text" [(ngModel)]="user.street" name="stret" #stret="ngModel" required></ion-input>
       </ion-item>
       <ion-item lines="none" *ngIf="stret.invalid && (stret.dirty || stret.touched)">
         <ion-label color="danger">
@@ -110,16 +110,6 @@
       <ion-item lines="none" *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)">
         <ion-label color="danger">
           <p *ngIf="neighborhood.errors.required">{{validationText.required}}</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Cidade</ion-label>
-        <ion-input type="text" [(ngModel)]="user.city" name="city" #city="ngModel" required></ion-input>
-      </ion-item>
-      <ion-item lines="none" *ngIf="city.invalid && (city.dirty || city.touched)">
-        <ion-label color="danger">
-          <p *ngIf="city.errors.required">{{validationText.required}}</p>
         </ion-label>
       </ion-item>
     </ion-list>
