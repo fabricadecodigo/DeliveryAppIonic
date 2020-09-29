@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-searchbar inputmode="search" showCancelButton="focus" (ionChange)="onSearchChange($event)"
-    (ionCancel)="onSearchCancel($event)"></ion-searchbar>
+    (ionCancel)="onSearchCancel()"></ion-searchbar>
 
   <ion-item-group *ngFor="let category of cardapio">
     <ion-item-divider>
